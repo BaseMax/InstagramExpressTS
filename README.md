@@ -24,7 +24,6 @@ Welcome to the Instagram-Clone-Express-TS repository! This project aims to repli
 - **AWS S3:** Use Amazon S3 for storing user-uploaded images securely. بجای این از سرویس ابروان برای اپلود کردن فایل ها استفاده کنیم
 - **Authentication:** Implement authentication using JWT (JSON Web Tokens) for secure user sessions.
 
-
 ## Getting Started
 
 To get started with this project, follow these steps:
