@@ -1,0 +1,56 @@
+version: "3.6"
+services:
+  app:
+    build:
+      context: .
+      target: development
+    depends_on:
+      - postgres
+
+    volumes:
+      - ./src:/app/src
+      - ./prisma:/app/prisma
+    command:
+      [
+        "./wait-for-it/wait-for-it.sh",
+        "postgres:5432",
+        "--",
+        "npm",
+        "run",
+        "dev",
+      ]
+    ports:
+      - 4000:4000
+      - 3000:3000
+    environment:
+      - DATABASE_URI=postgresql://postgres:password@postgres:5432/Instagram?schema=public
+      - SECRET_KEY="LASJKDA;LSKDA;Oshdlfsadjkafsdhflkajsdfliosdjknx"
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: Instagram
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+  migratedb:
+    image: app:latest
+    depends_on:
+      - postgres
+    command:
+      [
+        "./wait-for-it/wait-for-it.sh",
+        "postgres:5432",
+        "--",
+        "npx",
+        "prisma",
+        "migrate",
+        "deploy",
+      ]
+    environment:
+      - DATABASE_URI=postgresql://postgres:password@postgres:5432/Instagram
+volumes:
+  postgres:
