@@ -8,20 +8,21 @@ import argon2 from "argon2";
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
-    async createUser(createUserInput: ICreateUserInput): Promise<User> {
-      return await this.prisma.user.create({
-        data: {
-          ...createUserInput,
-          password: await argon2.hash(createUserInput.password),
-        },
-      });
-    }
+  async createUser(createUserInput: ICreateUserInput): Promise<User> {
+    return await this.prisma.user.create({
+      data: {
+        name: createUserInput.name,
+        email: createUserInput.email,
+        password: await argon2.hash(createUserInput.password),
+      },
+    });
+  }
 
-    async findByEmail(email: string): Promise<User | null> {
-      return await this.prisma.user.findUnique({
-        where: {
-          email,
-        },
-      });
-    }
+  async findByEmail(email: string): Promise<User | null> {
+    return await this.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+  }
 }

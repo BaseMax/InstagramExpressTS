@@ -1,8 +1,9 @@
 import { IsEmail, IsString } from "class-validator";
 import { Field, InputType } from "type-graphql";
+import { ICreateUserInput } from "../../interfaces/create-user";
 
 @InputType()
-export class CreateUserInput {
+export class SignupInput implements ICreateUserInput {
   @Field()
   @IsEmail()
   email: string;

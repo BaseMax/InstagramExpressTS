@@ -1,6 +1,8 @@
-import { JwtPayload } from "jsonwebtoken";
-import { inject } from "tsyringe";
+import { JwtPayload } from "../interfaces/jwt-payload";
+import { inject, injectable } from "tsyringe";
 import jwt from "jsonwebtoken";
+
+@injectable()
 export class JwtService {
   constructor(
     @inject("jwt-secret") private jwtSecret: string,

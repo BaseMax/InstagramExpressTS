@@ -3,3 +3,4 @@ export interface ICreateUserInput {
   readonly password: string;
   readonly email: string;
 }
+    

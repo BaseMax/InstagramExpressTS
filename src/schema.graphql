@@ -8,16 +8,22 @@ type AuthPayload {
   token: String!
 }
 
-input CreateUserInput {
+input LoginInput {
   email: String!
-  name: String!
   password: String!
 }
 
 type Mutation {
-  signup(input: CreateUserInput!): AuthPayload
+  login(input: LoginInput!): AuthPayload
+  signup(input: SignupInput!): AuthPayload
 }
 
 type Query {
   getHello: String!
+}
+
+input SignupInput {
+  email: String!
+  name: String!
+  password: String!
 }

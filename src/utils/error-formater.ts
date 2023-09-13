@@ -10,8 +10,6 @@ type IValidationError = Pick<
 >;
 
 export function formatError(error: any): GraphQLFormattedError {
-    console.log(error.extensions);
-    
   let originalError = unwrapResolverError(error);
   let validationMessages;
   if (error.message === "Argument Validation Error") {

@@ -38,19 +38,23 @@ services:
       - "5433:5432"
   migratedb:
     image: app:latest
-    depends_on:
-      - postgres
     command:
       [
         "./wait-for-it/wait-for-it.sh",
-        "postgres:5432",
+        "db:5432",
         "--",
         "npx",
         "prisma",
-        "migrate",
-        "deploy",
+        "db",
+        "push",
       ]
+    build:
+      context: .
+      target: development
+    depends_on:
+      postgres:
+        condition: service_started
     environment:
-      - DATABASE_URI=postgresql://postgres:password@postgres:5432/Instagram
+      - DATABASE_URI=postgresql://postgres:password@postgres:5432/Instagram?schema=public
 volumes:
   postgres:
