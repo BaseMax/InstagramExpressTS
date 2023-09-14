@@ -44,4 +44,21 @@ export class PostResolver {
 
     return await this.postService.updatePost(updatePostInput);
   }
+
+  @Authorized()
+  @Mutation(() => Post, { nullable: true })
+  async deletePost(
+    @Arg("input") idInput: InputId,
+    @getCurrentUserId() userId: number
+  ) {
+    const isAllowedToModify = await this.postService.isAllowedToModify(
+      userId,
+      idInput.id
+    );
+
+    if (!isAllowedToModify)
+      throw new GraphQLError("You aren't allowed to modify this post");
+
+    return await this.postService.deletePost(idInput.id );
+  }
 }

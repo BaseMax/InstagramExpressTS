@@ -29,6 +29,7 @@ input LoginInput {
 
 type Mutation {
   createPost(input: CreatePostInput!): Post!
+  deletePost(input: InputId!): Post
   login(input: LoginInput!): AuthPayload
   signup(input: SignupInput!): AuthPayload
   updatePost(input: UpdatePostInput!): Post

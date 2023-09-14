@@ -32,6 +32,14 @@ export class PostService {
       },
     });
   }
+
+  async deletePost(id: number): Promise<Post | null> {
+    return await this.prisma.post.delete({
+      where: {
+        id,
+      },
+    });
+  }
   async findById(id: number): Promise<Post | null> {
     return await this.prisma.post.findUnique({
       where: {
