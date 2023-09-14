@@ -1,10 +1,18 @@
 import { Request, Response, NextFunction } from "express";
-// import { JwtPayload } from "./interfaces/jwt-payload";
+import { JwtPayload } from "./modules/interfaces/jwt-payload";
+import { FastifyReply, FastifyRequest } from "fastify";
+import { ApolloFastifyContextFunction } from "@as-integrations/fastify";
 
 export type ContextType = {
-  req: Request;
-  res: Response;
-  nextFunction?: NextFunction;
-  jwtPayload?: any;
-  //JwtPayload;
+  req: FastifyRequest;
+  rep: FastifyReply;
+  jwtPayload?: JwtPayload;
 };
+  
+export  const myContextFunction: ApolloFastifyContextFunction<ContextType> = async (
+  request,
+  reply
+) => ({
+  req: request,
+  rep: reply,
+});
