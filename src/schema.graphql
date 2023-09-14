@@ -31,6 +31,7 @@ type Mutation {
   createPost(input: CreatePostInput!): Post!
   login(input: LoginInput!): AuthPayload
   signup(input: SignupInput!): AuthPayload
+  updatePost(input: UpdatePostInput!): Post
 }
 
 type Post {
@@ -50,4 +51,10 @@ input SignupInput {
   email: String!
   name: String!
   password: String!
+}
+
+input UpdatePostInput {
+  content: String
+  id: Int!
+  title: String
 }
