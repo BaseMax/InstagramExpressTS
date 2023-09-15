@@ -15,10 +15,11 @@ import { AuthResolver } from "./modules/auth/auth-resolver";
 import { formatError } from "./utils/error-formater";
 import { CustomAuthChecker } from "./modules/auth/auth-checker";
 import { PostResolver } from "./modules/post/post-resolver";
+import { LikeResolver } from "./modules/like/like-resolver";
 
 export async function createServer() {
   const schema = await buildSchema({
-    resolvers: [AuthResolver, UserResolver, PostResolver],
+    resolvers: [AuthResolver, UserResolver, LikeResolver, PostResolver],
     emitSchemaFile: path.resolve(__dirname, "schema.graphql"),
     container: {
       get: (cls) => container.resolve(cls),

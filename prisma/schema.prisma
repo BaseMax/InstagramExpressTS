@@ -11,19 +11,34 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
+  id       Int        @id @default(autoincrement())
+  email    String     @unique
   password String
   name     String
   posts    Post[]
+  likes    LikePost[]
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String
-  createdAt DateTime @default(now())
+  id           Int      @id @default(autoincrement())
+  title        String
+  content      String
+  countOfLikes Int      @default(0)
+  createdAt    DateTime @default(now())
 
   User     User @relation(fields: [authorId], references: [id])
   authorId Int
+
+  likes LikePost[]
+}
+
+model LikePost {
+  User   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+  Post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId Int
+
+  createdAt DateTime @default(now())
+
+  @@id([postId, userId])
 }

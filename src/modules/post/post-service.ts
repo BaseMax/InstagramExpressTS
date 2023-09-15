@@ -3,6 +3,7 @@ import { PrismaService } from "../../utils/prisma-service";
 import { Post } from "@prisma/client";
 import { CreatePostInput } from "./dto/create-post-dto";
 import { UpdatePostInput } from "./dto/update-post.dto";
+import { GraphQLError } from "graphql";
 
 @injectable()
 export class PostService {
@@ -48,6 +49,11 @@ export class PostService {
     });
   }
 
+  async findByIdOrThrow(id: number): Promise<Post | null> {
+    const post = await this.findById(id);
+    if (!post) throw new GraphQLError("there is no post with this credentials");
+    return post;
+  }
   async isAllowedToModify(userId: number, postId: number) {
     const post = await this.prisma.post.findFirst({
       where: {

@@ -22,6 +22,12 @@ input InputId {
   id: Int!
 }
 
+type LikePost {
+  createdAt: DateTimeISO!
+  postId: Int!
+  userId: Int!
+}
+
 input LoginInput {
   email: String!
   password: String!
@@ -30,6 +36,7 @@ input LoginInput {
 type Mutation {
   createPost(input: CreatePostInput!): Post!
   deletePost(input: InputId!): Post
+  likePost(input: InputId!): LikePost!
   login(input: LoginInput!): AuthPayload
   signup(input: SignupInput!): AuthPayload
   updatePost(input: UpdatePostInput!): Post
