@@ -1,5 +1,5 @@
 import { injectable } from "tsyringe";
-import { Arg, Authorized, Mutation, Resolver } from "type-graphql";
+import { Arg, Authorized, Mutation, Query, Resolver } from "type-graphql";
 import { UserService } from "../user/user-service";
 import { FollowService } from "./follow-service";
 import { Follow } from "./entity/follow-entity";
@@ -46,5 +46,10 @@ export class FollowResolver {
 
     if (!isFollowing) throw new GraphQLError("You aren't following this user");
     return await this.followService.unfollow(userId, followingIdInput.id);
+  }
+
+  @Query(() => [Follow])
+  async getFollowings(@Arg("input") followerIdInput: InputId) {
+    return await this.followService.getFollowings(followerIdInput.id);
   }
 }

@@ -40,4 +40,12 @@ export class FollowService {
 
     return following ? true : false;
   }
+
+  async getFollowings(followerId: number): Promise<Follow[]> {
+    return await this.prisma.follow.findMany({
+      where: {
+        followerId: followerId,
+      },
+    });
+  }
 }
