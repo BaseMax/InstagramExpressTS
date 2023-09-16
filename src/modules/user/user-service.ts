@@ -3,6 +3,7 @@ import { ICreateUserInput } from "../interfaces/create-user";
 import { User } from "@prisma/client";
 import { PrismaService } from "../../utils/prisma-service";
 import argon2 from "argon2";
+import { GraphQLError } from "graphql";
 
 @injectable()
 export class UserService {
@@ -24,5 +25,17 @@ export class UserService {
         email,
       },
     });
+  }
+
+  async findByIdOrThrow(id: number): Promise<User> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!user) throw new GraphQLError("there is no user with this id");
+
+    return user;
   }
 }

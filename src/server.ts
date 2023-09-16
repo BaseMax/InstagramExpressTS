@@ -17,6 +17,7 @@ import { CustomAuthChecker } from "./modules/auth/auth-checker";
 import { PostResolver } from "./modules/post/post-resolver";
 import { LikeResolver } from "./modules/like/like-resolver";
 import { CommentResolver } from "./modules/comment/comment-resolver";
+import { FollowResolver } from "./modules/follow/follow-resolver";
 
 export async function createServer() {
   const schema = await buildSchema({
@@ -26,6 +27,7 @@ export async function createServer() {
       LikeResolver,
       PostResolver,
       CommentResolver,
+      FollowResolver,
     ],
     emitSchemaFile: path.resolve(__dirname, "schema.graphql"),
     container: {

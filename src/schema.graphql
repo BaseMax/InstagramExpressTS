@@ -32,6 +32,12 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTimeISO
 
+type Follow {
+  createdAt: DateTimeISO!
+  followerId: Int!
+  followingId: Int!
+}
+
 input InputId {
   id: Int!
 }
@@ -50,7 +56,9 @@ input LoginInput {
 type Mutation {
   createComment(input: CreateCommentInput!): Comment!
   createPost(input: CreatePostInput!): Post!
+  deleteComment(input: InputId!): Comment!
   deletePost(input: InputId!): Post
+  follow(input: InputId!): Follow!
   likePost(input: InputId!): LikePost!
   login(input: LoginInput!): AuthPayload
   signup(input: SignupInput!): AuthPayload
