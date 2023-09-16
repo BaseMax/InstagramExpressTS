@@ -8,6 +8,20 @@ type AuthPayload {
   token: String!
 }
 
+type Comment {
+  createdAt: DateTimeISO!
+  id: Int!
+  message: String!
+  postId: Int!
+  updatedAt: DateTimeISO!
+  userId: Int!
+}
+
+input CreateCommentInput {
+  message: String!
+  postId: Int!
+}
+
 input CreatePostInput {
   content: String!
   title: String!
@@ -34,11 +48,13 @@ input LoginInput {
 }
 
 type Mutation {
+  createComment(input: CreateCommentInput!): Comment!
   createPost(input: CreatePostInput!): Post!
   deletePost(input: InputId!): Post
   likePost(input: InputId!): LikePost!
   login(input: LoginInput!): AuthPayload
   signup(input: SignupInput!): AuthPayload
+  updateComment(input: UpdateCommentInput!): Comment!
   updatePost(input: UpdatePostInput!): Post
 }
 
@@ -59,6 +75,11 @@ input SignupInput {
   email: String!
   name: String!
   password: String!
+}
+
+input UpdateCommentInput {
+  commentId: Int!
+  message: String!
 }
 
 input UpdatePostInput {
