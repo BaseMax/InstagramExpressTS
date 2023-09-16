@@ -11,13 +11,15 @@ datasource db {
 }
 
 model User {
-  id       Int        @id @default(autoincrement())
-  email    String     @unique
-  password String
-  name     String
-  posts    Post[]
-  likes    LikePost[]
-  comments Comment[]
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  password  String
+  name      String
+  posts     Post[]
+  likes     LikePost[]
+  comments  Comment[]
+  followers Follow[]   @relation("follower")
+  following Follow[]   @relation("following")
 }
 
 model Post {
@@ -56,4 +58,15 @@ model Comment {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+}
+
+model Follow {
+  follower    User @relation("follower", fields: [followerId], references: [id])
+  followerId  Int
+  following   User @relation("following", fields: [followingId], references: [id])
+  followingId Int
+
+  createdAt DateTime @default(now())
+
+  @@id([followerId, followingId])
 }
