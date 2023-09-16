@@ -14,4 +14,30 @@ export class FollowService {
       },
     });
   }
+
+  async unfollow(
+    followerId: number,
+    followingId: number
+  ): Promise<Follow | null> {
+    return await this.prisma.follow.delete({
+      where: {
+        followerId_followingId: {
+          followerId,
+          followingId,
+        },
+      },
+    });
+  }
+  async isFollowing(followerId: number, followingId: number): Promise<boolean> {
+    const following = await this.prisma.follow.findUnique({
+      where: {
+        followerId_followingId: {
+          followerId,
+          followingId,
+        },
+      },
+    });
+
+    return following ? true : false;
+  }
 }

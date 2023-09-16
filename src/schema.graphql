@@ -62,6 +62,7 @@ type Mutation {
   likePost(input: InputId!): LikePost!
   login(input: LoginInput!): AuthPayload
   signup(input: SignupInput!): AuthPayload
+  unfollow(input: InputId!): Follow!
   updateComment(input: UpdateCommentInput!): Comment!
   updatePost(input: UpdatePostInput!): Post
 }
