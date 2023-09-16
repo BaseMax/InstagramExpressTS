@@ -20,6 +20,10 @@ export class CommentService {
     });
   }
 
+  async getAllComments(): Promise<Comment[]> {
+    return await this.prisma.comment.findMany();
+  }
+
   async updateComment(
     updateCommentInput: UpdateCommentInput
   ): Promise<Comment | null> {

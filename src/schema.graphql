@@ -67,6 +67,7 @@ type Post {
 }
 
 type Query {
+  getComments: [Comment!]!
   getHello: String!
   getPost(input: InputId!): Post
 }

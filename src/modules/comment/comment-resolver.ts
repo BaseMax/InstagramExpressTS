@@ -1,5 +1,5 @@
 import { injectable } from "tsyringe";
-import { Authorized, Resolver, Mutation, Arg } from "type-graphql";
+import { Authorized, Resolver, Mutation, Arg, Query } from "type-graphql";
 import { CommentService } from "./comment-service";
 import { Comment } from "./entity/comment-entity";
 import { CreateCommentInput } from "./dto/create-comment-input";
@@ -26,6 +26,11 @@ export class CommentResolver {
       createCommentInput.postId
     );
     return await this.commentService.createComment(userId, createCommentInput);
+  }
+
+  @Query(() => [Comment])
+  async getComments() {
+    return await this.commentService.getAllComments();
   }
 
   @Authorized()
