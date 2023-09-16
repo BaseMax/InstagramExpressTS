@@ -7,6 +7,7 @@ import { getCurrentUserId } from "../auth/getCurrentUserId";
 import { PostService } from "../post/post-service";
 import { UpdateCommentInput } from "./dto/update-comment-dto";
 import { GraphQLError } from "graphql";
+import { InputId } from "../../utils/Id-validation";
 
 @injectable()
 @Resolver()
@@ -47,5 +48,22 @@ export class CommentResolver {
     if (!comment)
       throw new GraphQLError("You aren't allowed to modify this comment");
     return await this.commentService.updateComment(updateCommentInput);
+  }
+  @Authorized()
+  @Mutation(() => Comment)
+  async deleteComment(
+    @Arg("input") inputId: InputId,
+    @getCurrentUserId() userId: number
+  ) {
+    const comment = await this.commentService.isAllowedToModify(
+      userId,
+      inputId.id
+    );
+    if (!comment)
+      throw new GraphQLError("You aren't allowed to modify this comment");
+
+    console.log(comment);
+
+    return this.commentService.deleteComment(inputId.id);
   }
 }

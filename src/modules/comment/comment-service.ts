@@ -34,6 +34,14 @@ export class CommentService {
       },
     });
   }
+
+  async deleteComment(commentId: number): Promise<Comment> {
+    return await this.prisma.comment.delete({
+      where: {
+        id: commentId,
+      },
+    });
+  }
   async isAllowedToModify(userId: number, commentId: number): Promise<boolean> {
     const isAllowed = await this.prisma.comment.findFirst({
       where: {
