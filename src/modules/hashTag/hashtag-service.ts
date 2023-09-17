@@ -2,6 +2,7 @@ import { injectable } from "tsyringe";
 import { PrismaService } from "../../utils/prisma-service";
 import { CreateTagInput } from "./dto/create-hash-tag-input";
 import { HashTag } from "@prisma/client";
+import { GraphQLError } from "graphql";
 
 @injectable()
 export class HashTagService {
@@ -21,5 +22,15 @@ export class HashTagService {
         name,
       },
     });
+  }
+  async findByIdOrThrow(id: number): Promise<HashTag | null> {
+    const hashTag = await this.prisma.hashTag.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!hashTag)
+      throw new GraphQLError("Hash tag with this credentials doesn't exist");
+    return hashTag;
   }
 }

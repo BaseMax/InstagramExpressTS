@@ -1,6 +1,5 @@
 import "reflect-metadata";
 import { buildSchema } from "type-graphql";
-import { UserResolver } from "./modules/user/user-resolver";
 import fastifyApollo, {
   fastifyApolloDrainPlugin,
 } from "@as-integrations/fastify";
@@ -24,12 +23,11 @@ export async function createServer() {
   const schema = await buildSchema({
     resolvers: [
       AuthResolver,
-      UserResolver,
       LikeResolver,
       PostResolver,
       CommentResolver,
       FollowResolver,
-      HashTagResolver
+      HashTagResolver,
     ],
     emitSchemaFile: path.resolve(__dirname, "schema.graphql"),
     container: {
@@ -55,5 +53,5 @@ export async function createServer() {
   const url = await app.listen({ port: 3000, host: "0.0.0.0" });
   logger.info(` 🚀 GraphQL server ready at: ${url}`);
 
-  return { app, url };
+  return { app, url, apollo };
 }

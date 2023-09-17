@@ -62,7 +62,6 @@ export class CommentResolver {
     if (!comment)
       throw new GraphQLError("You aren't allowed to modify this comment");
 
-    console.log(comment);
 
     return this.commentService.deleteComment(inputId.id);
   }
