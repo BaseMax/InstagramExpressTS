@@ -18,6 +18,7 @@ import { PostResolver } from "./modules/post/post-resolver";
 import { LikeResolver } from "./modules/like/like-resolver";
 import { CommentResolver } from "./modules/comment/comment-resolver";
 import { FollowResolver } from "./modules/follow/follow-resolver";
+import { HashTagResolver } from "./modules/hashTag/hashtag-resolver";
 
 export async function createServer() {
   const schema = await buildSchema({
@@ -28,6 +29,7 @@ export async function createServer() {
       PostResolver,
       CommentResolver,
       FollowResolver,
+      HashTagResolver
     ],
     emitSchemaFile: path.resolve(__dirname, "schema.graphql"),
     container: {

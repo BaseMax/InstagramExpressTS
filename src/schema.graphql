@@ -27,6 +27,10 @@ input CreatePostInput {
   title: String!
 }
 
+input CreateTagInput {
+  name: String!
+}
+
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format.
 """
@@ -36,6 +40,12 @@ type Follow {
   createdAt: DateTimeISO!
   followerId: Int!
   followingId: Int!
+}
+
+type HashTag {
+  createdAt: DateTimeISO!
+  id: Int!
+  name: String!
 }
 
 input InputId {
@@ -55,6 +65,7 @@ input LoginInput {
 
 type Mutation {
   createComment(input: CreateCommentInput!): Comment!
+  createHashTag(input: CreateTagInput!): HashTag!
   createPost(input: CreatePostInput!): Post!
   deleteComment(input: InputId!): Comment!
   deletePost(input: InputId!): Post
