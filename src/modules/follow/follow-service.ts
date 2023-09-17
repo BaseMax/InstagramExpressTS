@@ -48,4 +48,12 @@ export class FollowService {
       },
     });
   }
+
+  async getFollowers(followingId: number): Promise<Follow[]> {
+    return await this.prisma.follow.findMany({
+      where: {
+        followingId: followingId,
+      },
+    });
+  }
 }

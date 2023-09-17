@@ -52,4 +52,9 @@ export class FollowResolver {
   async getFollowings(@Arg("input") followerIdInput: InputId) {
     return await this.followService.getFollowings(followerIdInput.id);
   }
+
+  @Query(() => [Follow])
+  async getFollowers(@Arg("input") followerIdInput: InputId) {
+    return await this.followService.getFollowers(followerIdInput.id);
+  }
 }
