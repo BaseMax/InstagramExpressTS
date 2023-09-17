@@ -6,6 +6,9 @@ import { LikePost } from "@prisma/client";
 export class LikeService {
   constructor(private readonly prisma: PrismaService) {}
 
+  async getAllLikes(): Promise<LikePost[]> {
+    return await this.prisma.likePost.findMany({});
+  }
   async likePost(userId: number, postId: number): Promise<LikePost> {
     return this.prisma.likePost.create({
       data: {

@@ -1,4 +1,4 @@
-import { Arg, Authorized, Mutation, Resolver } from "type-graphql";
+import { Arg, Authorized, Mutation, Query, Resolver } from "type-graphql";
 import { LikeService } from "./liker-service";
 import { PostService } from "../post/post-service";
 import { InputId } from "../../utils/Id-validation";
@@ -27,5 +27,10 @@ export class LikeResolver {
     return isLiked
       ? await this.likeService.unlikePost(userId, inputId.id)
       : await this.likeService.likePost(userId, inputId.id);
+  }
+
+  @Query(() => [LikePost])
+  async getAllLikes() {
+    return await this.likeService.getAllLikes();
   }
 }
