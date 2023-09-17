@@ -52,4 +52,12 @@ export class CommentService {
 
     return isAllowed ? true : false;
   }
+
+  async findById(id: number): Promise<Comment | null> {
+    return await this.prisma.comment.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
 }

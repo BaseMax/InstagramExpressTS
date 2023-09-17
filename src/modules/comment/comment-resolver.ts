@@ -66,4 +66,9 @@ export class CommentResolver {
 
     return this.commentService.deleteComment(inputId.id);
   }
+
+  @Query(() => Comment, { nullable: true  })
+  async getCommentById(@Arg("input") inputId: InputId) {
+    return await this.commentService.findById(inputId.id);
+  }
 }

@@ -88,6 +88,7 @@ type Post {
 
 type Query {
   getAllLikes: [LikePost!]!
+  getCommentById(input: InputId!): Comment
   getComments: [Comment!]!
   getFollowers(input: InputId!): [Follow!]!
   getFollowings(input: InputId!): [Follow!]!
