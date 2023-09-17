@@ -87,6 +87,7 @@ type Post {
 }
 
 type Query {
+  getAllLikes: [LikePost!]!
   getComments: [Comment!]!
   getFollowings(input: InputId!): [Follow!]!
   getHello: String!
