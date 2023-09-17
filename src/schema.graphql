@@ -92,7 +92,6 @@ type Query {
   getComments: [Comment!]!
   getFollowers(input: InputId!): [Follow!]!
   getFollowings(input: InputId!): [Follow!]!
-  getHello: String!
   getPost(input: InputId!): Post
 }
 
