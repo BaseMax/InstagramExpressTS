@@ -24,6 +24,8 @@ input CreateCommentInput {
 
 input CreatePostInput {
   content: String!
+  fileUrls: [String!]!
+  hashTagId: Int!
   title: String!
 }
 
@@ -45,6 +47,11 @@ type Follow {
 type HashTag {
   createdAt: DateTimeISO!
   id: Int!
+  name: String!
+  posts: [Post!]!
+}
+
+input HashTagName {
   name: String!
 }
 
@@ -82,17 +89,22 @@ type Post {
   authorId: Int!
   content: String!
   createdAt: DateTimeISO!
+  fileUrls: [String!]!
   id: Int!
   title: String!
 }
 
 type Query {
+  getAllHashTags: [HashTag!]!
   getAllLikes: [LikePost!]!
   getCommentById(input: InputId!): Comment
   getComments: [Comment!]!
   getFollowers(input: InputId!): [Follow!]!
   getFollowings(input: InputId!): [Follow!]!
+  getHashTag(input: InputId!): HashTag
+  getHashTagPosts(input: HashTagName!): HashTag
   getPost(input: InputId!): Post
+  getPosts: [Post!]
 }
 
 input SignupInput {
@@ -108,6 +120,8 @@ input UpdateCommentInput {
 
 input UpdatePostInput {
   content: String
+  fileUrls: [String!]
+  hashTagId: Int
   id: Int!
   title: String
 }

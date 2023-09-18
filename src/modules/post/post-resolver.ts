@@ -8,11 +8,15 @@ import { PostService } from "./post-service";
 import { InputId } from "../../utils/Id-validation";
 import { UpdatePostInput } from "./dto/update-post.dto";
 import { GraphQLError } from "graphql";
+import { HashTagService } from "../hashTag/hashtag-service";
 
 @Resolver()
 @injectable()
 export class PostResolver {
-  constructor(private readonly postService: PostService) {}
+  constructor(
+    private readonly postService: PostService,
+    private readonly hashTagService: HashTagService
+  ) {}
 
   @Authorized()
   @Mutation(() => Post)
@@ -20,6 +24,9 @@ export class PostResolver {
     @Arg("input") createPostInput: CreatePostInput,
     @getCurrentUserId() userId: number
   ) {
+    const hashTag = await this.hashTagService.findByIdOrThrow(
+      createPostInput.hashTagId
+    );
     return await this.postService.createPost(userId, createPostInput);
   }
 
@@ -28,12 +35,22 @@ export class PostResolver {
     return this.postService.findById(idInput.id);
   }
 
+  @Query(() => [Post], { nullable: true })
+  async getPosts() {
+    return this.postService.getPosts();
+  }
+
   @Authorized()
   @Mutation(() => Post, { nullable: true })
   async updatePost(
     @Arg("input") updatePostInput: UpdatePostInput,
     @getCurrentUserId() userId: number
   ) {
+    if (updatePostInput.hashTagId) {
+      const hashTag = await this.hashTagService.findByIdOrThrow(
+        updatePostInput.hashTagId
+      );
+    }
     const isAllowedToModify = await this.postService.isAllowedToModify(
       userId,
       updatePostInput.id
@@ -59,6 +76,6 @@ export class PostResolver {
     if (!isAllowedToModify)
       throw new GraphQLError("You aren't allowed to modify this post");
 
-    return await this.postService.deletePost(idInput.id );
+    return await this.postService.deletePost(idInput.id);
   }
 }

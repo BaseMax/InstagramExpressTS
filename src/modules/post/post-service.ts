@@ -17,6 +17,8 @@ export class PostService {
       data: {
         title: createPostInput.title,
         content: createPostInput.content,
+        fileUrls: createPostInput.fileUrls,
+        hashTagId: createPostInput.hashTagId,
         authorId: userId,
       },
     });
@@ -30,6 +32,8 @@ export class PostService {
       data: {
         title: updatePostInput.title,
         content: updatePostInput.content,
+        fileUrls: updatePostInput.fileUrls,
+        hashTagId: updatePostInput.hashTagId,
       },
     });
   }
@@ -49,6 +53,9 @@ export class PostService {
     });
   }
 
+  async getPosts(): Promise<Post[]> {
+    return await this.prisma.post.findMany();
+  }
   async findByIdOrThrow(id: number): Promise<Post | null> {
     const post = await this.findById(id);
     if (!post) throw new GraphQLError("there is no post with this credentials");

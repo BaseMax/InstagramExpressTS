@@ -21,8 +21,16 @@ export class HashTagService {
       where: {
         name,
       },
+      include: {
+        posts: true,
+      },
     });
   }
+
+  async findAllHashTags(): Promise<HashTag[]> {
+    return await this.prisma.hashTag.findMany({});
+  }
+
   async findByIdOrThrow(id: number): Promise<HashTag | null> {
     const hashTag = await this.prisma.hashTag.findUnique({
       where: {

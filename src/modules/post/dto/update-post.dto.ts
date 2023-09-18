@@ -16,4 +16,14 @@ export class UpdatePostInput {
   @IsString()
   @IsOptional()
   content: string;
+
+  @IsOptional({ each: true })
+  @IsString({ each: true })
+  @Field(() => [String], { nullable: true })
+  fileUrls: string[];
+
+  @Field(() => Int, { nullable: true })
+  @IsOptional()
+  @IsNumber()
+  hashTagId: number;
 }

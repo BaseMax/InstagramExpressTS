@@ -11,6 +11,9 @@ export class Post {
   @Field()
   content: string;
 
+  @Field(() => [String])
+  fileUrls: string[];
+  
   @Field(() => Int)
   authorId: number;
 

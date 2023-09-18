@@ -1,15 +1,16 @@
 import { Field, Int, ObjectType } from "type-graphql";
+import { Post } from "../../post/entity/post-entity";
 
 @ObjectType()
-export class HashTag{
+export class HashTag {
+  @Field(() => Int)
+  id: number;
 
-    @Field(()=>Int)
-    id : number
+  @Field()
+  name: string;
 
-    @Field() 
-    name  : string
-
-    @Field(()=>Date)
-    createdAt :Date
-    
+  @Field(() => [Post])
+  posts: Post[];
+  @Field(() => Date)
+  createdAt: Date;
 }
