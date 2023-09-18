@@ -12,10 +12,10 @@ export class CreatePostInput {
   content: string;
 
   @IsString({ each: true })
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   fileUrls: string[];
 
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   @IsNumber()
   hashTagId: number;
 }

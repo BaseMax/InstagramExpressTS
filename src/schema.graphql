@@ -24,8 +24,8 @@ input CreateCommentInput {
 
 input CreatePostInput {
   content: String!
-  fileUrls: [String!]!
-  hashTagId: Int!
+  fileUrls: [String!]
+  hashTagId: Int
   title: String!
 }
 

@@ -24,9 +24,11 @@ export class PostResolver {
     @Arg("input") createPostInput: CreatePostInput,
     @getCurrentUserId() userId: number
   ) {
-    const hashTag = await this.hashTagService.findByIdOrThrow(
-      createPostInput.hashTagId
-    );
+    if (createPostInput.hashTagId) {
+      const hashTag = await this.hashTagService.findByIdOrThrow(
+        createPostInput.hashTagId
+      );
+    }
     return await this.postService.createPost(userId, createPostInput);
   }
 

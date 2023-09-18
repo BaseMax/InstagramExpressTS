@@ -274,6 +274,8 @@ describe("AppController (e2e)", () => {
           },
         });
 
+        console.log(response.body.errors);
+        
       const post = response.body.data.createPost;
       expect(response.status).toBe(200);
       expect(post.title).toBe("it is title");
