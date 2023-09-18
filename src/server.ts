@@ -18,6 +18,7 @@ import { LikeResolver } from "./modules/like/like-resolver";
 import { CommentResolver } from "./modules/comment/comment-resolver";
 import { FollowResolver } from "./modules/follow/follow-resolver";
 import { HashTagResolver } from "./modules/hashTag/hashtag-resolver";
+import { uploadRoutes } from "./modules/file/file-controller";
 
 export async function createServer() {
   const schema = await buildSchema({
@@ -45,6 +46,7 @@ export async function createServer() {
     plugins: [fastifyApolloDrainPlugin(app)],
   });
 
+  app.register(uploadRoutes);
   await apollo.start();
   await app.register(fastifyApollo(apollo), {
     context: myContextFunction,
