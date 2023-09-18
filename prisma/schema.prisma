@@ -29,6 +29,8 @@ model Post {
   countOfLikes Int      @default(0)
   createdAt    DateTime @default(now())
 
+  fileUrls String[]
+
   User     User @relation(fields: [authorId], references: [id])
   authorId Int
 
