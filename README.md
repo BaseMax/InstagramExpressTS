@@ -31,23 +31,27 @@ To get started with this project, follow these steps:
    git clone https://github.com/BaseMax/InstagramExpressTS.git
    ```
 
-Navigate to the project directory:
+2. Navigate to the project directory:
 
 ```bash
 cd InstagramExpressTS
 ```
 
-Install dependencies:
+3. Install dependencies:
 
 ```bash
 npm install
 ```
 
-Set up your environment variables by creating a `.env` file in the root directory. You can use the `.env.example` file as a template.
+4. Set up your environment variables by creating a `.env` file in the root directory. You can use the `.env.example` file as a template.
 
-you should set DATABASE_URI for running the app by docker :
+4. You should set `DATABASE_URI` for running the app by docker:
 
+```
 DATABASE_URI = "postgresql://postgres:password@postgres:5432/Instagram?schema=public"
+```
+
+And then
 
 ```bash
 docker compose build
@@ -106,7 +110,3 @@ Contributions are welcome! If you'd like to contribute to this project, please r
 This project is licensed under the GPL-3.0 License.
 
 Copyright 2023, Max Base
-
-```
-
-```
