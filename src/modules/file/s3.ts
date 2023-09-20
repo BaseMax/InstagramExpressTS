@@ -7,18 +7,18 @@ export class S3 {
 
   private constructor() {}
   static getInstance() {
-    if (this.s3) return this.s3;
+    if (!this.s3)
+      return new S3Client({
+        credentials: {
+          accessKeyId: container.resolve("accessKeyId"),
+          secretAccessKey: container.resolve("secretAccessKey"),
+        },
 
-    return new S3Client({
-      credentials: {
-        accessKeyId: container.resolve("accessKeyId"),
-        secretAccessKey: container.resolve("secretAccessKey"),
-    
-      },
-    
-      endpoint: container.resolve("S3_URI"),
-      forcePathStyle: true,
-      region: "eu-west-1",
-    });
+        endpoint: container.resolve("S3_URI"),
+        forcePathStyle: true,
+        region: "eu-west-1",
+      });
+
+    return this.s3;
   }
 }
