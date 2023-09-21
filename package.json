@@ -33,7 +33,7 @@
     "cuid": "^3.0.0",
     "dotenv": "^16.3.1",
     "fastify": "^4.19.2",
-    "graphql": "^16.7.1",
+    "graphql": "^16.8.1",
     "jsonwebtoken": "^9.0.1",
     "pino-pretty": "^10.2.0",
     "prisma": "^5.3.0",
