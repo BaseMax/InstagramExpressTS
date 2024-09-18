@@ -32,7 +32,7 @@
     "class-validator": "^0.14.0",
     "cuid": "^3.0.0",
     "dotenv": "^16.3.1",
-    "fastify": "^4.19.2",
+    "fastify": "^4.28.1",
     "graphql": "^16.8.1",
     "jsonwebtoken": "^9.0.1",
     "pino-pretty": "^10.2.0",
