@@ -23,7 +23,7 @@
   "dependencies": {
     "@apollo/server": "^4.7.5",
     "@as-integrations/fastify": "^3.1.0",
-    "@aws-sdk/client-s3": "^3.651.1",
+    "@aws-sdk/client-s3": "^3.981.0",
     "@fastify/multipart": "^8.3.1",
     "@prisma/client": "^5.3.0",
     "@types/argon2": "^0.15.0",
