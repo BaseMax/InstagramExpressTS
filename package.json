@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/BaseMax/InstagramExpressTS#readme",
   "dependencies": {
-    "@apollo/server": "^4.7.5",
+    "@apollo/server": "^4.13.0",
     "@as-integrations/fastify": "^3.1.0",
     "@aws-sdk/client-s3": "^3.981.0",
     "@fastify/multipart": "^8.3.1",
